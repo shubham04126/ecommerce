@@ -19,7 +19,7 @@ const Login = () => {
       .signInWithEmailAndPassword(email, password)
       .then(() => {
         setSuccessMsg(
-          "Login Successfull. You will now automatically get redirected to Home page"
+          "Login Successful. You will now automatically get redirected to Home page"
         );
         setEmail("");
         setPassword("");

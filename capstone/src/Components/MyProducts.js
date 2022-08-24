@@ -22,7 +22,7 @@ function MyProducts() {
       .catch((err) => {
         console.log("Error occured");
       });
-    console.log(allDocs[0]);
+    console.log(allDocs);
   };
 
   return (
