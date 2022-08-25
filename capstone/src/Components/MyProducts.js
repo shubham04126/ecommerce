@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { auth, fs } from "../Config/Config";
 
 function MyProducts() {
   const [allDocs, setAllDocs] = useState([]);
+  const [show, setShow] = useState(false);
 
   const fetchAll = (e) => {
     e.preventDefault();
@@ -23,15 +24,22 @@ function MyProducts() {
         console.log("Error occured");
       });
     console.log(allDocs);
+    setShow((prev) => !prev);
   };
+
+  // useEffect(() => {
+  //   fetchAll();
+  // }, []);
 
   return (
     <>
-      <div className="text-center">
-        <div className="btn btn-primary item-center mt-4" onClick={fetchAll}>
-          Fetch My History
+      {!show && (
+        <div className="text-center">
+          <div className="btn btn-primary item-center mt-4" onClick={fetchAll}>
+            Fetch My History
+          </div>
         </div>
-      </div>
+      )}
       <h1 className="fw-bold mb-4 text-center mt-4">My History</h1>
       {allDocs.map((doc) => {
         return (

@@ -20,7 +20,7 @@ const Modal = ({ TotalPrice, totalQty, hideModal }) => {
     hideModal();
   };
 
-  // cash on delivery
+  // checkout
   const handleCashOnDelivery = async (e) => {
     e.preventDefault();
     // console.log(cell, residentialAddress, cartPrice, cartQty);

@@ -6,9 +6,10 @@ import IndividualFilteredProduct from "./IndividualFilteredProduct";
 import images from "./Carousel/Images";
 import ImageSlider from "./Carousel/ImageSlider";
 import Footer from "../Components/Footer/Footer";
+import Announcement from "./Announcement";
 
 const Home = (props) => {
-  // getting current user UID
+  // getting current user UID function
   function GetUserUid() {
     const [uid, setUid] = useState(null);
     useEffect(() => {
@@ -83,7 +84,6 @@ const Home = (props) => {
     });
   }, []);
 
-  // globle variable
   let Product;
 
   // add to cart function
@@ -163,6 +163,7 @@ const Home = (props) => {
 
   return (
     <>
+      <Announcement />
       <Navbar user={user} totalProducts={totalProducts} />
       <br></br>
       <div className="container">

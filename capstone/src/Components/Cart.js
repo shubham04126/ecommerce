@@ -95,9 +95,7 @@ const Cart = () => {
 
   const totalPrice = price.reduce(reducerOfPrice, 0);
 
-  // global variable
   let Product;
-
   // cart product increase function
   const cartProductIncrease = (cartProduct) => {
     // console.log(cartProduct);
@@ -111,7 +109,7 @@ const Cart = () => {
           .doc(cartProduct.ID)
           .update(Product)
           .then(() => {
-            console.log("increment added");
+            console.log("increment");
           });
       } else {
         console.log("user is not logged in to increment");
@@ -155,41 +153,7 @@ const Cart = () => {
     });
   }, []);
 
-  // charging payment
   const navigate = useNavigate();
-  const handleToken = async (token) => {
-    //  console.log(token);
-    const cart = { name: "All Products", totalPrice };
-    const response = await axios.post("http://localhost:8080/checkout", {
-      token,
-      cart,
-    });
-    console.log(response);
-    let { status } = response.data;
-    console.log(status);
-    if (status === "success") {
-      navigate("/");
-      toast.success("Your order has been placed successfully", {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: false,
-        draggable: false,
-        progress: undefined,
-      });
-
-      const uid = auth.currentUser.uid;
-      const carts = await fs.collection("Cart " + uid).get();
-      for (var snap of carts.docs) {
-        fs.collection("Cart " + uid)
-          .doc(snap.id)
-          .delete();
-      }
-    } else {
-      alert("Something went wrong in checkout");
-    }
-  };
 
   return (
     <>
@@ -215,17 +179,6 @@ const Cart = () => {
               Total Price to Pay: <span>$ {totalPrice}</span>
             </div>
             <br></br>
-            {/* <StripeCheckout
-              stripeKey="pk_test_51LZsJ6SCQaSLHVzKsF8R95PmjivofC041ErPbcbt9phz1g0qO91aPyFHX1iQPfBApH1biW5MxbJimAqoGXrdZRId000i0GRRf4"
-              token={handleToken}
-              billingAddress
-              shippingAddress
-              name="All Products"
-              amount={totalPrice * 100}
-            ></StripeCheckout> */}
-            {/* <h6 className="text-center" style={{ marginTop: 7 + "px" }}>
-              OR
-            </h6> */}
             <button
               className="btn btn-secondary btn-md"
               onClick={() => triggerModal()}

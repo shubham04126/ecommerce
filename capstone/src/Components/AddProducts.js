@@ -9,9 +9,7 @@ const AddProducts = () => {
   const [price, setPrice] = useState("");
   const [category, setCategory] = useState("");
   const [image, setImage] = useState(null);
-
   const [imageError, setImageError] = useState("");
-
   const [successMsg, setSuccessMsg] = useState("");
   const [uploadError, setUploadError] = useState("");
 
@@ -30,6 +28,8 @@ const AddProducts = () => {
       console.log("please select your file");
     }
   };
+
+  //On submission of form
 
   const handleAddProducts = (e) => {
     e.preventDefault();
@@ -70,7 +70,7 @@ const AddProducts = () => {
                 setTimeout(() => {
                   setSuccessMsg("");
                   navigate("/");
-                }, 3000);
+                }, 2000);
               })
               .catch((error) => setUploadError(error.message));
           });

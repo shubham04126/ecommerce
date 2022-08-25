@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import Img from "../Images/logo.png";
 import { auth } from "../Config/Config";
 import { useNavigate } from "react-router-dom";
+import "./Login.css";
 
+//Login
 const Login = () => {
   const navigate = useNavigate();
 
@@ -19,7 +22,7 @@ const Login = () => {
       .signInWithEmailAndPassword(email, password)
       .then(() => {
         setSuccessMsg(
-          "Login Successful. You will now automatically get redirected to Home page"
+          "Login Successfully. You will now automatically get redirected to Home page"
         );
         setEmail("");
         setPassword("");
@@ -27,65 +30,71 @@ const Login = () => {
         setTimeout(() => {
           setSuccessMsg("");
           navigate("/");
-        }, 3000);
+        }, 2000);
       })
       .catch((error) => setErrorMsg(error.message));
   };
 
   return (
-    <div
-      className="container my-5"
-      style={{ width: "30%", border: "2px solid rgb(236, 230, 230)" }}
-    >
-      <br></br>
-      <br></br>
-      <h1 className="fw-bold mb-4 text-center">Login</h1>
-      <hr></hr>
-      {successMsg && (
-        <>
-          <div className="success-msg">{successMsg}</div>
-          <br></br>
-        </>
-      )}
-      <form className="form-group" autoComplete="off" onSubmit={handleLogin}>
-        <label>Email</label>
-        <input
-          type="email"
-          className="form-control"
-          required
-          onChange={(e) => setEmail(e.target.value)}
-          value={email}
-        ></input>
-        <br></br>
-        <label>Password</label>
-        <input
-          type="password"
-          className="form-control"
-          required
-          onChange={(e) => setPassword(e.target.value)}
-          value={password}
-        ></input>
-        <br></br>
-        <div className="btn-box">
-          <span>
-            Don't have an account SignUp <span> </span>
-            <Link to="/signup" className="link">
-              Here
-            </Link>
-          </span>
-          <div className="text-center">
-            <button type="submit" className="btn btn-dark btn-md">
-              LOGIN
-            </button>
+    <div class="parent clearfix">
+      <div class="bg-illustration">
+        <img
+          src={Img}
+          alt="logo"
+          style={{ borderRadius: "50%", width: "150px" }}
+        />
+
+        <div class="burger-btn">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+
+      <div class="login">
+        <div class="container">
+          <h1 className="text-center" style={{ color: "#3B3B3B" }}>
+            Login
+          </h1>
+          <div class="login-form">
+            {successMsg && (
+              <>
+                <div className="success-msg">{successMsg}</div>
+                <br></br>
+              </>
+            )}
+            <form action="" onSubmit={handleLogin}>
+              <input
+                type="email"
+                placeholder="Email Address"
+                onChange={(e) => setEmail(e.target.value)}
+                value={email}
+                required
+              />
+              <input
+                type="password"
+                placeholder="Password"
+                onChange={(e) => setPassword(e.target.value)}
+                value={password}
+                required
+              />
+              <span className="text-center">
+                Don't have an account SignUp <span> </span>
+                <Link to="/signup" className="link">
+                  Here
+                </Link>
+                <button type="submit">LOG IN</button>
+              </span>
+            </form>
+            {errorMsg && (
+              <>
+                <br></br>
+                <div className="error-msg">{errorMsg}</div>
+              </>
+            )}
           </div>
         </div>
-      </form>
-      {errorMsg && (
-        <>
-          <br></br>
-          <div className="error-msg">{errorMsg}</div>
-        </>
-      )}
+      </div>
     </div>
   );
 };
